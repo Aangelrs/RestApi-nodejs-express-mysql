@@ -5,7 +5,7 @@ import "dotenv/config";
 //Routes
 import taskRoutes from "./routes/task.routes.js";
 import welcomeRoutes from "./routes/welcome.routes.js";
-//import userRouters from "./routes/user.routes.js";
+import userRoutes from "./routes/user.routes.js";
 
 const app = express();
 
@@ -19,7 +19,8 @@ app.use(express.json());
 //Routes 
 
 app.use("/api" , taskRoutes);
-app.use("/" , welcomeRoutes);
+app.use("/task/" , welcomeRoutes);
+app.use("/user", userRoutes);
 
 
 
