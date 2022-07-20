@@ -31,7 +31,7 @@ const getTaskUser = async(req, res) =>{
        // console.log(req.params);
         const { codeUser } = req.params;
         const connection = await getConnection();
-        const result = await connection.query("SELECT nameTask, descriptionTask FROM task WHERE userCode = ?", codeUser);
+        const result = await connection.query("SELECT nameTask, descriptionTask FROM task WHERE codeUser = ?", codeUser);
         res.json(result);
     } catch (error) {
         res.status(500);
@@ -83,15 +83,15 @@ const deleteTask = async(req, res) =>{
 const updateTask = async(req , res) => {
     try {
         const { id } = req.params;
-        const { nameTask, descriptionTask } = req.body;
+        const { nameTask, descriptionTask } = req.query;
         const task = { nameTask, descriptionTask };
         console.log(task);
         if( id === undefined, nameTask === undefined, descriptionTask === undefined){
             res.status(400).json({message: "Bad resquest. Please fill all field."});
         }else{
             const connection = await getConnection();
-            const result = await connection.query("UPDATE task set nameTask = '"+ nameTask +"', descriptionTask ='"+ descriptionTask + "' WHERE id = " + id );
-            //const result = await connection.query("UPDATE task SET = ? WHERE = ?", [task , id]);
+            //const result = await connection.query("UPDATE task set nameTask = '"+ nameTask +"', descriptionTask ='"+ descriptionTask + "' WHERE id = " + id );
+            const result = await connection.query("UPDATE task SET nameTask = ?, descriptionTask = ? WHERE id = ?", [nameTask, descriptionTask , id]);
             res.json(result);
         }
     } catch (error) {

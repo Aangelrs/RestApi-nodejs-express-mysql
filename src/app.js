@@ -18,8 +18,8 @@ app.use(express.json());
 
 //Routes 
 
-app.use("/api" , taskRoutes);
-app.use("/task/" , welcomeRoutes);
+app.use("/task" , taskRoutes);
+app.use("/" , welcomeRoutes);
 app.use("/user", userRoutes);
 
 
