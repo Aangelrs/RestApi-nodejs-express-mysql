@@ -29,9 +29,9 @@ const getTasks = async(req, res) =>{
 const getTaskUser = async(req, res) =>{
     try {
        // console.log(req.params);
-        const { codeUser } = req.params;
+        const { id } = req.params;
         const connection = await getConnection();
-        const result = await connection.query("SELECT nameTask, descriptionTask FROM task WHERE codeUser = ?", codeUser);
+        const result = await connection.query("SELECT nameTask, descriptionTask FROM task WHERE id = ?", id);
         res.json(result);
     } catch (error) {
         res.status(500);
